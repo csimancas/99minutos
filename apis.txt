@@ -1,0 +1,67 @@
+### Create User
+POST https://prueba-tecninca-backend-qndxoltwga-uc.a.run.app/users/create
+Content-Type: application/json
+
+{
+  "FirstName": "Jose",
+  "LastName": "Perez",
+  "IsAdmin": true,
+  "Email": "j.p1@gmail.com",
+  "Password": "123456"
+}
+
+### Create Order
+POST https://prueba-tecninca-backend-qndxoltwga-uc.a.run.app/orders/create
+Content-Type: application/json
+Authorization: Basic j.p1@gmail.com 123456
+
+{
+  "DestinationAddress": {
+    "Coordinates": "1.1,1.1",
+    "FirstName": "Jose",
+    "LastName": "Rodriguez",
+    "Street": "Pinos 1",
+    "ZipCode": "12392",
+    "State": "Coahuila",
+    "City": "Saltillo",
+    "Neighbourhood": "La Colonia",
+    "ExNumber": "1",
+    "InNumber": "1",
+    "PhoneNumber": "111111111"
+  },
+  "Products": [
+    {
+      "Weight": 1
+    },
+    {
+      "Weight": 1
+    }
+  ]
+}
+
+### Get Order
+### para obtener los detalles de la orden, debes incluir al final del path
+### el id generado por el api en la llamada anterior
+GET https://prueba-tecninca-backend-qndxoltwga-uc.a.run.app/orders/{{id}}
+Content-Type: application/json
+Authorization: Basic j.p1@gmail.com 123456
+
+### Cancel Order
+### al igual que el endpoint anterior, usar el id de la orden en el path
+PUT https://prueba-tecninca-backend-qndxoltwga-uc.a.run.app/orders/{{id}}/cancelado
+Content-Type: application/json
+Authorization: Basic j.p1@gmail.com 123456
+
+
+
+
+
+
+
+{
+  "FirstName": "Jose Luis",
+  "LastName": "Cueto",
+  "IsAdmin": true,
+  "Email": "jose.cuetos31@gmail.com",
+  "Password": "123456"
+}
