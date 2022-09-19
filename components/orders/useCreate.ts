@@ -3,18 +3,17 @@ import { createOrder } from "../../services/orders";
 import Validate from "../../helpers/validations";
 
 const orderState = {
-    Coordinates: "",
-    FirstName: "",
-    LastName: "",
-    Street: "",
-    ZipCode: "",
-    State: "",
-    City: "",
-    Neighbourhood: "",
-    ExNumber: 0,
-    InNumber: 0,
-    PhoneNumber: "",
-    Products: [],
+  Coordinates: "",
+  FirstName: "",
+  LastName: "",
+  Street: "",
+  ZipCode: "",
+  State: "",
+  City: "",
+  Neighbourhood: "",
+  ExNumber: 0,
+  InNumber: 0,
+  PhoneNumber: "",
 };
 
 const GENERIC_REDUCER = (state: any, payload: any) => {
@@ -27,6 +26,7 @@ const useCreateOrder = (onSuccess?: Function) => {
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
   const [form, dispatch] = useReducer(GENERIC_REDUCER, orderState);
+  const [product, setProduct] = useState([]);
 
   const showModal = useCallback(() => setVisible(true), []);
   const hideModal = useCallback(() => setVisible(false), []);
@@ -93,9 +93,11 @@ const useCreateOrder = (onSuccess?: Function) => {
     []
   );
 
-  const onChangeProducts = useCallback((product: any) => {
-    dispatch({ product: { ...form.product, ...product } });
-  }, []);
+  const onAddProdcut = useCallback(
+    ({ target: { value } }) => dispatch({ s value.toUpperCase() }),
+    []
+  );
+
 
   const cleanError = useCallback(() => setError(""), []);
   const onSubmit = useCallback(async () => {
@@ -136,6 +138,8 @@ const useCreateOrder = (onSuccess?: Function) => {
     loading,
     visible,
     setVisible,
+    product,
+    setProduct
   };
 };
 

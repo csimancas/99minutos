@@ -5,10 +5,12 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  Divider,
   Grid,
   TextField,
 } from "@mui/material";
 import useCreateOrder from "./useCreate";
+import { ProductionQuantityLimitsSharp } from "@mui/icons-material";
 
 interface ContractFormProps {
   onSucces?: Function;
@@ -36,8 +38,12 @@ const Orders = (props: ContractFormProps) => {
     onChangeProducts,
     cleanError,
     onSubmit,
+    product,
+    setProduct,
     loading,
   } = useCreateOrder(props.onSucces);
+
+  const addProduct = () => {};
   return (
     <>
       <Button onClick={showModal} sx={{ ml: "16px" }}>
@@ -142,10 +148,6 @@ const Orders = (props: ContractFormProps) => {
             />
           </Grid>
 
-          
-
-          <Grid item xs={6}></Grid>
-
           <Grid item xs={12}>
             <TextField
               fullWidth
@@ -155,8 +157,29 @@ const Orders = (props: ContractFormProps) => {
               required
             />
           </Grid>
-        </DialogContent>
 
+          <Grid container spacing={2}>
+            <Grid item xs={8}>
+              <TextField
+                fullWidth
+                label="Productos"
+                onChange={onChangeProducts}
+                required
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Button type="button" variant="contained">
+                +
+              </Button>
+            </Grid>
+          </Grid>
+
+          <Divider />
+          {product.map((item: any) => {
+            <p>Peso del producto: {item.weight}</p>;
+          })}
+          <Divider />
+        </DialogContent>
         <DialogActions>
           <Button onClick={hideModal} disabled={loading}>
             Cancelar
