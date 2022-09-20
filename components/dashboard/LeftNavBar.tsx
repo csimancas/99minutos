@@ -42,7 +42,7 @@ const LeftNavbar = (props: any) => {
       <Toolbar />
       <Box sx={{ overflow: "auto" }}>
         <List>
-          <LinkItem href="/orders" label="Crear orden" icon={<Dashboard />} />
+          {/* <LinkItem href="/orders" label="Crear orden" icon={<Dashboard />} /> */}
 
           <LinkItem href="/detail" label="Ordenes" icon={<SettingsSuggest />} />
         </List>

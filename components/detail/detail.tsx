@@ -14,6 +14,7 @@ import moment from "moment";
 import { array } from "../../data";
 import CardDetail from "../cardDetail";
 import { cancelOrder } from "../../services/orders";
+import Orders from "../orders/create";
 
 const DataTable = () => {
   const [data, setData] = useState([]);
@@ -111,6 +112,9 @@ const OrderDetail = () => {
           <h3>Tabla de ordenes</h3>
         </Grid>
         <DataTable />
+      </Grid>
+      <Grid item xs={3} sx={{justifyContent:'flex-end'}}>
+        <Orders />
       </Grid>
     </Paper>
   );
