@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useMemo, useReducer, useState } from "react";
 import { createOrder } from "../../services/orders";
-import Validate from "../../helpers/validations";
 
 const orderState = {
   Coordinates: "",
@@ -101,7 +100,7 @@ const useCreateOrder = (onSuccess?: Function) => {
 
   const addProduct = () => {
     let products: any = [...product];
-    let obj: any = { Weight: weight };
+    let obj: any = { Weight: parseFloat(weight) };
     products.push(obj);
     setProduct(products);
     console.log(products);
@@ -109,18 +108,14 @@ const useCreateOrder = (onSuccess?: Function) => {
 
   const cleanError = useCallback(() => setError(""), []);
   const onSubmit = useCallback(async () => {
-    console.log(product);
     let params = {
       DestinationAddress: { ...form },
       Products: product,
     };
+    console.log(params);
     try {
-      setLoading(true);
-      setError("");
-      console.log(params);
-      await createOrder(params);
       setLoading(false);
-      if (onSuccess) onSuccess();
+      createOrder(params);
     } catch (error: any) {
       setLoading(false);
       setError(error.message);

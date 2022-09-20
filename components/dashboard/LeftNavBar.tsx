@@ -1,12 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import {
-  Business,
-  Dashboard,
-  ExpandLess,
-  ExpandMore,
-  RoomService,
-} from "@mui/icons-material";
+import { Business, Dashboard, SettingsSuggest } from "@mui/icons-material";
+
 import {
   Box,
   Collapse,
@@ -49,16 +44,7 @@ const LeftNavbar = (props: any) => {
         <List>
           <LinkItem href="/orders" label="Crear orden" icon={<Dashboard />} />
 
-          <LinkItem
-            href="/settings/service"
-            label="Servicios"
-            icon={<RoomService />}
-          />
-          <LinkItem
-            href="/settings/permission"
-            label="Niveles de acceso"
-            icon={<Business />}
-          />
+          <LinkItem href="/detail" label="Ordenes" icon={<SettingsSuggest />} />
         </List>
       </Box>
     </Drawer>
