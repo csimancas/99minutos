@@ -35,15 +35,13 @@ const Orders = (props: ContractFormProps) => {
     onChangeExtNumber,
     onChangeIntNumber,
     onChangePhoneNumber,
-    onChangeProducts,
-    cleanError,
+    onChangeProduct,
+    addProduct,
     onSubmit,
     product,
-    setProduct,
     loading,
   } = useCreateOrder(props.onSucces);
 
-  const addProduct = () => {};
   return (
     <>
       <Button onClick={showModal} sx={{ ml: "16px" }}>
@@ -52,15 +50,13 @@ const Orders = (props: ContractFormProps) => {
       <Dialog open={visible}>
         <DialogTitle id="partner-title">Crear orden</DialogTitle>
         <DialogContent dividers>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              label="Coordenadas"
-              value={form.Coordinates}
-              onChange={onChangeCoordinates}
-              required
-            />
-          </Grid>
+          <TextField
+            fullWidth
+            label="Coordenadas"
+            value={form.Coordinates}
+            onChange={onChangeCoordinates}
+            required
+          />
 
           <Grid item xs={6}>
             <TextField
@@ -162,21 +158,26 @@ const Orders = (props: ContractFormProps) => {
             <Grid item xs={8}>
               <TextField
                 fullWidth
+                type={"number"}
                 label="Productos"
-                onChange={onChangeProducts}
+                onChange={onChangeProduct}
                 required
               />
             </Grid>
             <Grid item xs={4}>
-              <Button type="button" variant="contained">
-                +
+              <Button
+                type="button"
+                variant="contained"
+                onClick={() => addProduct()}
+              >
+                Agregar producto
               </Button>
             </Grid>
           </Grid>
 
           <Divider />
           {product.map((item: any) => {
-            <p>Peso del producto: {item.weight}</p>;
+            <p>Peso del producto: {item.Weight}</p>;
           })}
           <Divider />
         </DialogContent>

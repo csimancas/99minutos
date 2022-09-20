@@ -27,6 +27,7 @@ const useCreateOrder = (onSuccess?: Function) => {
   const [visible, setVisible] = useState(false);
   const [form, dispatch] = useReducer(GENERIC_REDUCER, orderState);
   const [product, setProduct] = useState([]);
+  const [weight, setWeight] = useState("");
 
   const showModal = useCallback(() => setVisible(true), []);
   const hideModal = useCallback(() => setVisible(false), []);
@@ -43,7 +44,7 @@ const useCreateOrder = (onSuccess?: Function) => {
       form.ExNumber.lenght > 0 &&
       form.InNumber.lenght > 0 &&
       form.PhoneNumber.lenght > 0 &&
-      form.Products.lenght > 0
+      product.length > 0
     );
   }, [form]);
 
@@ -81,11 +82,11 @@ const useCreateOrder = (onSuccess?: Function) => {
     []
   );
   const onChangeExtNumber = useCallback(
-    ({ target: { value } }) => dispatch({ ExNumber: value }),
+    ({ target: { value } }) => dispatch({ ExNumber: value.toString() }),
     []
   );
   const onChangeIntNumber = useCallback(
-    ({ target: { value } }) => dispatch({ InNumber: value }),
+    ({ target: { value } }) => dispatch({ InNumber: value.toString() }),
     []
   );
   const onChangePhoneNumber = useCallback(
@@ -93,20 +94,31 @@ const useCreateOrder = (onSuccess?: Function) => {
     []
   );
 
-  const onAddProdcut = useCallback(
-    ({ target: { value } }) => dispatch({ s value.toUpperCase() }),
+  const onChangeProduct = useCallback(
+    ({ target: { value } }) => setWeight(value),
     []
   );
 
+  const addProduct = () => {
+    let products: any = [...product];
+    let obj: any = { Weight: weight };
+    products.push(obj);
+    setProduct(products);
+    console.log(products);
+  };
 
   const cleanError = useCallback(() => setError(""), []);
   const onSubmit = useCallback(async () => {
+    console.log(product);
+    let params = {
+      DestinationAddress: { ...form },
+      Products: product,
+    };
     try {
-      let params = { ...form };
       setLoading(true);
       setError("");
-      //await createOrder(params);
       console.log(params);
+      await createOrder(params);
       setLoading(false);
       if (onSuccess) onSuccess();
     } catch (error: any) {
@@ -132,14 +144,14 @@ const useCreateOrder = (onSuccess?: Function) => {
     onChangeExtNumber,
     onChangeIntNumber,
     onChangePhoneNumber,
-    onChangeProducts,
+    onChangeProduct,
+    addProduct,
     cleanError,
     onSubmit,
     loading,
     visible,
     setVisible,
     product,
-    setProduct
   };
 };
 
